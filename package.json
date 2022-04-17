@@ -45,6 +45,7 @@
   "devDependencies": {
     "@redux-devtools/extension": "^3.2.2",
     "jest": "^27.5.1",
+    "jsdoc": "^3.6.10",
     "prop-types": "^15.8.1"
   }
 }
