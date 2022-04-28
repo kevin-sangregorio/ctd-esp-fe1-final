@@ -6,6 +6,7 @@ import { fetchCharactersThunk } from '../store/actions/charactersActions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from '../store/store';
 
+
 /**
  * Esta es la pagina principal. Aquí se debera ver el panel de filtros junto con la grilla de personajes.
  *

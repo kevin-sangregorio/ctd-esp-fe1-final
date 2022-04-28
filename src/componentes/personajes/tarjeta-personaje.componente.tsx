@@ -1,13 +1,22 @@
-import BotonFavorito from '../botones/boton-favorito.componente';
-import './tarjeta-personaje.css';
+/* Dependencies */
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+/* Components */
+import BotonFavorito from '../botones/boton-favorito.componente';
+
+/* Styles */
+import './tarjeta-personaje.css';
+
+/* Others */
 import { useSelector } from '../../store/store';
 import Character from '../../interfaces/character';
 import {
   addFavorite,
   removeFavorite,
 } from '../../store/actions/charactersActions';
+import { fetchEpisodesThunk } from '../../store/actions/episodesActions';
 
 interface Props {
   character: Character;
@@ -20,9 +29,14 @@ interface Props {
  * @returns {JSX.Element}
  */
 const TarjetaPersonaje: FC<Props> = ({ character }: Props) => {
-  const { idFavorites } = useSelector((state) => state.characters);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { idFavorites } = useSelector((state) => state.characters);
   const isFavorite = idFavorites.includes(character.id);
+  const episodes: string[] = character.episode;
+
+  console.log(episodes);
+  
 
   const handleFavorite = () => {
     isFavorite
@@ -30,9 +44,18 @@ const TarjetaPersonaje: FC<Props> = ({ character }: Props) => {
       : dispatch(addFavorite(character));
   };
 
+  const handleEpisodes = () => {
+    dispatch(fetchEpisodesThunk(episodes))
+    navigate('/detalle')
+  };
+
   return (
     <div className="tarjeta-personaje">
-      <img src={character.image} alt={character.name} />
+      <img
+        src={character.image}
+        alt={character.name}
+        onClick={handleEpisodes}
+      />
       <div className="tarjeta-personaje-body">
         <span>{character.name}</span>
         <BotonFavorito esFavorito={isFavorite} onClick={handleFavorite} />

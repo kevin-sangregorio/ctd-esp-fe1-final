@@ -1,7 +1,6 @@
 import { Reducer } from '@reduxjs/toolkit';
 import { CharacterActions } from '../actions/charactersActions';
 import Character from '../../interfaces/character';
-import { stat } from 'fs';
 
 export interface CharacterState {
   status: 'IDLE' | 'LOADING' | 'COMPLETED' | 'FAILED';
