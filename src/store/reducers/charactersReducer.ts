@@ -1,6 +1,10 @@
+/* Dependencies */
 import { Reducer } from '@reduxjs/toolkit';
+
+/* Others */
 import { CharacterActions } from '../actions/charactersActions';
 import Character from '../../interfaces/character';
+import CharacterDetail from '../../interfaces/characterDetail';
 
 export interface CharacterState {
   status: 'IDLE' | 'LOADING' | 'COMPLETED' | 'FAILED';
@@ -8,6 +12,7 @@ export interface CharacterState {
   errorMessage: string | null;
   favorites: Character[];
   idFavorites: number[];
+  characterDetail: CharacterDetail | null;
 }
 
 const initialState: CharacterState = {
@@ -16,6 +21,7 @@ const initialState: CharacterState = {
   errorMessage: null,
   favorites: [],
   idFavorites: [],
+  characterDetail: null,
 };
 
 const characterReducer: Reducer<CharacterState, CharacterActions> = (
@@ -64,6 +70,20 @@ const characterReducer: Reducer<CharacterState, CharacterActions> = (
       };
     case 'CLEAN_FAVORITES':
       return { ...state, characters: [], favorites: [], idFavorites: [] };
+    case 'SEARCH_CHARACTER_BY_ID_PENDING':
+      return { ...state, status: 'LOADING' };
+    case 'SEARCH_CHARACTER_BY_ID_SUCCESS':
+      return {
+        ...state,
+        status: 'COMPLETED',
+        characterDetail: action.characterDetail,
+      };
+    case 'SEARCH_CHARACTER_BY_ID_FAILED':
+      return {
+        ...state,
+        status: 'FAILED',
+        errorMessage: action.error,
+      };
     default:
       return state;
   }

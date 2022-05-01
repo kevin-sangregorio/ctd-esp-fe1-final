@@ -14,6 +14,7 @@ import { useSelector } from '../../store/store';
 import Character from '../../interfaces/character';
 import {
   addFavorite,
+  fetchCharacterByIdThunk,
   removeFavorite,
 } from '../../store/actions/charactersActions';
 import { fetchEpisodesThunk } from '../../store/actions/episodesActions';
@@ -25,7 +26,7 @@ interface Props {
 /**
  * Tarjeta para cada personaje dentro de la grilla de personajes.
  *
- * @param {character} Character personaje
+ * @param {Character} character personaje
  * @returns {JSX.Element}
  */
 const TarjetaPersonaje: FC<Props> = ({ character }: Props) => {
@@ -35,18 +36,16 @@ const TarjetaPersonaje: FC<Props> = ({ character }: Props) => {
   const isFavorite = idFavorites.includes(character.id);
   const episodes: string[] = character.episode;
 
-  console.log(episodes);
-  
-
   const handleFavorite = () => {
     isFavorite
       ? dispatch(removeFavorite(character))
       : dispatch(addFavorite(character));
   };
 
-  const handleEpisodes = () => {
+  const handleClickImage = () => {
     dispatch(fetchEpisodesThunk(episodes))
-    navigate('/detalle')
+    dispatch(fetchCharacterByIdThunk(character.id))
+    navigate(`/detalle/${character.id}`)
   };
 
   return (
@@ -54,7 +53,7 @@ const TarjetaPersonaje: FC<Props> = ({ character }: Props) => {
       <img
         src={character.image}
         alt={character.name}
-        onClick={handleEpisodes}
+        onClick={handleClickImage}
       />
       <div className="tarjeta-personaje-body">
         <span>{character.name}</span>

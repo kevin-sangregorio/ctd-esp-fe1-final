@@ -1,6 +1,5 @@
 import './grilla-personajes.css';
 import TarjetaPersonaje from './tarjeta-personaje.componente';
-import { useSelector } from '../../store/store';
 import Character from '../../interfaces/character';
 
 interface Props {

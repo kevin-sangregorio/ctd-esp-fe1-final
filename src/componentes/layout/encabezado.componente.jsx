@@ -23,9 +23,10 @@ const Encabezado = () => {
             <li>
               <Link to="/favoritos">Favoritos</Link>
             </li>
-            <li>
+            {/* Lo comento porque no quiero que se pueda acceder desde la navegación. Solo se puede clickeando en la imágen de los perosnajes */}
+            {/* <li>
               <Link to="/detalle">Detalle</Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>

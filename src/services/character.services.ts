@@ -1,4 +1,5 @@
 import Character from '../interfaces/character';
+import CharacterDetail from '../interfaces/characterDetail';
 
 export const searchCharacter = async (
   characterName?: string
@@ -10,4 +11,12 @@ export const searchCharacter = async (
   );
   const data = await response.json();
   return data.results;
+};
+
+export const searchCharacterById = async (id: number): Promise<CharacterDetail> => {
+  const response = await fetch(
+    `https://rickandmortyapi.com/api/character/${id}`
+  );
+  const data = await response.json();
+  return data;
 };
