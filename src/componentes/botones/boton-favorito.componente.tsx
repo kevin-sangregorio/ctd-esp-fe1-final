@@ -1,5 +1,7 @@
-import './boton-favorito.css';
+/* Dependencies */
 import { FC } from 'react';
+/* Styles */
+import './boton-favorito.css';
 
 interface Props {
   esFavorito: boolean;

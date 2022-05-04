@@ -2,13 +2,10 @@
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 /* Components */
 import BotonFavorito from '../botones/boton-favorito.componente';
-
 /* Styles */
 import './tarjeta-personaje.css';
-
 /* Others */
 import { useSelector } from '../../store/store';
 import Character from '../../interfaces/character';
